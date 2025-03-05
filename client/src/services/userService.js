@@ -9,8 +9,21 @@ export const getAll = async () => {
     return users;
 };
 
+export const create = async (userData) => {
+    const response  = await fetch(baseUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'aplication/json'
+        },
+        body: JSON.stringify(userData)
+    });
+
+    const result = await response.json();
+    return result;
+}
 const userService = {
     getAll,
+    create
 }
 
 export default userService;
