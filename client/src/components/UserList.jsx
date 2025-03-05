@@ -19,8 +19,11 @@ export default function UserList() {
   }, []);
 
 
-  const AddUserClickHandler = () => {
+  const createUserClickHandler = () => {
       setShowCreate(true);
+  }
+  const closeCreateUserHandler = () => {
+    setShowCreate(false)
   }
 
   return (
@@ -29,7 +32,7 @@ export default function UserList() {
       <section className="card users-container">
       <Search />
 
-      {showCreate && <UserCreate />}
+      {showCreate && <UserCreate onClose={closeCreateUserHandler} />}
         <div className="table-wrapper">
           <div className="overlays">
           {/* <!-- Overlap components  --> */}
@@ -208,7 +211,7 @@ export default function UserList() {
         </div>
 
         {/* <!-- New user button  --> */}
-        <button className="btn-add btn" onClick={AddUserClickHandler}>Add new user</button>
+        <button className="btn-add btn" onClick={createUserClickHandler}>Add new user</button>
 
         <Pagination />
       </section>
