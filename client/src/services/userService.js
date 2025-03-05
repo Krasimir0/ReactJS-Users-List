@@ -1,5 +1,4 @@
-const baseUrl = 'http://localhost:3030/jsonstore/users'
-
+const baseUrl = 'http://localhost:3030/jsonstore/users';
 
 export const getAll = async () => {
     const response = await fetch(baseUrl);
@@ -10,12 +9,18 @@ export const getAll = async () => {
 };
 
 export const create = async (userData) => {
+    const {country, city, street, streetNumber, postData} = userData;
+
+    postData.address = { country, city, street, streetNumber }; 
+    postData.createdAt = new Date().toISOString();
+    postData.updatedAt = new Date().toISOString(); 
+    
     const response  = await fetch(baseUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'aplication/json'
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(postData)
     });
 
     const result = await response.json();
